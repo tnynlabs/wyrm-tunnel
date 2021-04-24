@@ -1,14 +1,15 @@
 package tunnels
 
 type DeviceRequest struct {
-
+	Pattern string
+	Data string
 }
 
 type DeviceResponse struct {
-	
+	Data string
 }
 
 type DeviceTunnel interface {
-	SendDeviceRequest(r *DeviceRequest) (*DeviceResponse, error)
-	Close() error // to be called when revoked
+	SendDeviceRequest(req DeviceRequest) (*DeviceResponse, error)
+	Close() error
 }
