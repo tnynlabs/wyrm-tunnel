@@ -8,4 +8,12 @@ protoc \
     --go_opt=paths=source_relative \
     --go-grpc_out=$BASE_PATH \
     --go-grpc_opt=paths=source_relative \
-    $BASE_PATH/manager/manager.proto
+    $BASE_PATH/manager/protobuf/manager.proto
+
+protoc \
+    --proto_path=$BASE_PATH \
+    --go_out=$BASE_PATH \
+    --go_opt=paths=source_relative \
+    --go-grpc_out=$BASE_PATH \
+    --go-grpc_opt=paths=source_relative \
+    $BASE_PATH/transport/tungrpc/protobuf/tunnel.proto
