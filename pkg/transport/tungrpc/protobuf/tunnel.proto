@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "github.com/tnynlabs/wyrm-tunnel/pkg/transport/tungrpc/protobuf";
+
+package wyrm.tunnel;
+
+service DeviceTunnel {
+    rpc CreateTunnel(stream DeviceResponse) returns (stream DeviceRequest) {}
+}
+
+message DeviceRequest {
+    string pattern = 1;
+    string data = 2;
+}
+
+message DeviceResponse {
+    string data = 1;
+}
