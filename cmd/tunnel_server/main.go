@@ -1,23 +1,26 @@
 package main
 
 import (
-	"sync"
 	"log"
-	
-	"github.com/tnynlabs/wyrm-tunnel/pkg/tunnels"
+	"os"
+	"sync"
+
 	"github.com/tnynlabs/wyrm-tunnel/pkg/manager"
 	"github.com/tnynlabs/wyrm-tunnel/pkg/transport/tungrpc"
-	"github.com/tnynlabs/wyrm/pkg/storage/postgres"
+	"github.com/tnynlabs/wyrm-tunnel/pkg/tunnels"
 	"github.com/tnynlabs/wyrm/pkg/devices"
+	"github.com/tnynlabs/wyrm/pkg/storage/postgres"
 
 	"github.com/joho/godotenv"
 )
 
 func main() {
-	// Load environment variables from .env file
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatalf("Error loading .env file (error: %v)", err)
+	if devFlag := os.Getenv("WYRM_DEV"); devFlag == "1" {
+		// Load environment variables from .env file
+		err := godotenv.Load(".env")
+		if err != nil {
+			log.Fatalf("Error loading .env file (error: %v)", err)
+		}
 	}
 
 	db, err := postgres.GetFromEnv()
